@@ -90,17 +90,6 @@ app.get("/", function(req, res){
 
 app.get("/tables", function(req, res){
     res.sendFile(path.join(__dirname, "tables.html"));
-
-    	for(var i=0; i < diners.length; i++){
-
-			var $table = $("<section>");
-			$table.addClass("well");
-
-			var $diner = $("<div>");
-			$diner.attr("id", res[i].uniqueId);
-			$("#current").append($table);
-
-		}
 });
 
 app.get("/reserve", function(req, res){
