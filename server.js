@@ -46,36 +46,6 @@ var diners = [{
 	phone: "913-269-1115",
 	email: "mason@email.com",
 	uniqueId: 98231
-},
-{
-	name: "",
-	phone: "",
-	email: "",
-	uniqueId: "":
-},
-{
-	name: "",
-	phone: "",
-	email: "",
-	uniqueId: "":
-},
-{
-	name: "",
-	phone: "",
-	email: "",
-	uniqueId: "":
-},
-{
-	name: "",
-	phone: "",
-	email: "",
-	uniqueId: "":
-},
-{
-	name: "",
-	phone: "",
-	email: "",
-	uniqueId: "":
 }];
 
 
@@ -86,21 +56,53 @@ var diners = [{
 //================================================================================================
 
 
-require(".app/routing/api-routes.js")(app);
-require(".app/routing/html-routes.js")(app);
+// require(".app/routing/api-routes.js")(app);
+// require(".app/routing/html-routes.js")(app);
 
 
-app.get("/", function(request, response){
-    res.sendFile(path.join(__dirname, "index.html")); //<------ Will need html filename.
+app.get("/food/:diners?", function (req, res){
+	
+	for(var i=0; i < diners.length; i++){
+
+		var $table = $("<div>");
+		$table.addClass("well");
+		table.attr("id", "table#-" + i + 1)
+		$("#fakeid").append($table)
+
+	}
+
+	var chosen = req.params.diners;
+
+	console.log(res);
+
+	if(chosen){
+		for(var i=0; i < diners.length; i++){
+			if(chosen === diners[i].uniqueId){
+				res.json(diners[i]);
+				return;
+			}
+		}
+
+		res.json(false);
+
+	} else{
+		res.json(diners);
+	}
 });
 
 
-app.get("/table", function(request, response){
-    res.sendFile(path.join(__dirname, "tables.html")); //<------ Will need html filename.
+
+app.get("/", function(req, res){
+    res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.get("/reserve", function(request, response){
-    res.sendFile(path.join(__dirname, "reserve.html")); //<------ Will need html filename.
+
+app.get("/tables", function(req, res){
+    res.sendFile(path.join(__dirname, "tables.html"));
+});
+
+app.get("/reserve", function(req, res){
+    res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
 
